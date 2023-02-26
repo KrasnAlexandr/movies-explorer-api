@@ -18,8 +18,8 @@ export const MOVIE_SCHEMA_ERROR_MESSAGE = {
 
 export const corsParams = {
   origin: [
-    'https://movies.alexred.nomoredomainsclub.ru',
-    'http://movies.alexred.nomoredomainsclub.ru',
+    'https://movies.alexred.nomoredomains.work',
+    'http://movies.alexred.nomoredomains.work',
     'http://localhost:3000',
   ],
   credentials: true,
