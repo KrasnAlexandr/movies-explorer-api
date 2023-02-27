@@ -1,8 +1,8 @@
 import { Schema, model } from 'mongoose';
+import bcrypt from 'bcryptjs';
+import validator from 'validator';
 import UnauthorizedError from '../errors/UnauthorizedError.js';
 import { USER_SCHEMA_ERROR_MESSAGE } from '../utils/constants.js';
-import { validateEmailRegex } from '../utils/validateRegex.js';
-import bcrypt from 'bcryptjs';
 
 const userSchema = new Schema({
   email: {
@@ -10,9 +10,7 @@ const userSchema = new Schema({
     required: true,
     unique: true,
     validate: {
-      validator(v) {
-        return validateEmailRegex.test(v);
-      },
+      validator: (email) => validator.isEmail(email),
       message: USER_SCHEMA_ERROR_MESSAGE.WRONG_EMAIL,
     },
   },
@@ -29,8 +27,7 @@ const userSchema = new Schema({
   },
 });
 
-// eslint-disable-next-line func-names
-userSchema.statics.findUserByCredentials = function (email, password) {
+function findUserByCredentials(email, password) {
   return this.findOne({ email })
     .select('+password')
     .then((user) => {
@@ -52,6 +49,8 @@ userSchema.statics.findUserByCredentials = function (email, password) {
         return user;
       });
     });
-};
+}
+
+userSchema.statics.findUserByCredentials = findUserByCredentials;
 
 export default model('user', userSchema);

@@ -1,6 +1,6 @@
 import { Schema, model } from 'mongoose';
-import { MOVIE_SCHEMA_ERROR_MESSAGE } from '../utils/constants.js';
-import { validateUrlRegex } from '../utils/validateRegex.js';
+import validator from 'validator';
+import { WRONG_URL_ERROR_MESSAGE } from '../utils/constants.js';
 
 const movieSchema = new Schema({
   country: {
@@ -27,30 +27,24 @@ const movieSchema = new Schema({
     type: String,
     required: true,
     validate: {
-      validator(v) {
-        return validateUrlRegex.test(v);
-      },
-      message: MOVIE_SCHEMA_ERROR_MESSAGE.WRONG_URL,
+      validator: (url) => validator.isURL(url),
+      message: WRONG_URL_ERROR_MESSAGE,
     },
   },
   trailerLink: {
     type: String,
     required: true,
     validate: {
-      validator(v) {
-        return validateUrlRegex.test(v);
-      },
-      message: MOVIE_SCHEMA_ERROR_MESSAGE.WRONG_URL,
+      validator: (url) => validator.isURL(url),
+      message: WRONG_URL_ERROR_MESSAGE,
     },
   },
   thumbnail: {
     type: String,
     required: true,
     validate: {
-      validator(v) {
-        return validateUrlRegex.test(v);
-      },
-      message: MOVIE_SCHEMA_ERROR_MESSAGE.WRONG_URL,
+      validator: (url) => validator.isURL(url),
+      message: WRONG_URL_ERROR_MESSAGE,
     },
   },
   owner: {

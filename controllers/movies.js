@@ -25,7 +25,6 @@ export const createMovie = (req, res, next) => {
       res.status(201).send(newMovie);
     })
     .catch((err) => {
-      console.log(err);
       if (err.name === 'ValidationError') {
         next(new BadRequestError(badRequestErrorMessage));
       } else {
@@ -44,7 +43,10 @@ export const deleteMovie = (req, res, next) => {
         throw new ForbiddenError(wrongUserMessage);
       }
 
-      movie.remove().then(() => res.send({ message: movieDeletedMessage }));
+      movie
+        .remove()
+        .then(() => res.send({ message: movieDeletedMessage }))
+        .catch(next);
     })
     .catch((err) => {
       if (err.name === 'CastError') {

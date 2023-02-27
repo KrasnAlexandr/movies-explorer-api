@@ -4,7 +4,9 @@ import BadRequestError from '../errors/BadRequestError.js';
 import {
   badRequestErrorMessage,
   returnNotFoundUserErrorText,
+  USER_SCHEMA_ERROR_MESSAGE,
 } from '../utils/constants.js';
+import RequestConflictError from '../errors/RequestConflictError.js';
 
 export const getCurrentUser = (req, res, next) => {
   User.findById(req.user._id)
@@ -25,7 +27,11 @@ export const updateCurrentUser = (req, res, next) => {
     .orFail(new NotFoundError(returnNotFoundUserErrorText(req.user._id)))
     .then((user) => res.send(user))
     .catch((err) => {
-      if (err.name === 'ValidationError') {
+      if (err.name === 'MongoServerError' && err.code === 11000) {
+        next(
+          new RequestConflictError(USER_SCHEMA_ERROR_MESSAGE.CONFLICT_ERROR),
+        );
+      } else if (err.name === 'ValidationError') {
         next(new BadRequestError(badRequestErrorMessage));
       } else {
         next(err);
