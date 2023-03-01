@@ -1,0 +1,12 @@
+{
+  "extends": "airbnb-base",
+  "env": {
+    "node": true,
+    "es2021": true
+  },
+  "rules": {
+    "no-console": "off",
+    "no-underscore-dangle": ["error", { "allow": ["_id"] }],
+    "import/extensions": [0, { "js": "always" }]
+  }
+}

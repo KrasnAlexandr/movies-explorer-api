@@ -1,0 +1,44 @@
+{
+  "name": "movies-explorer-api",
+  "version": "1.0.0",
+  "description": "Yandex Practicum final work",
+  "main": "./app.js",
+  "type": "module",
+  "scripts": {
+    "start": "node app.js",
+    "dev": "nodemon app.js",
+    "lint": "npx eslint .",
+    "fix": "npx eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KrasnAlexandr/movies-explorer-api.git"
+  },
+  "author": "Alex Red",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KrasnAlexandr/movies-explorer-api/issues"
+  },
+  "homepage": "https://github.com/KrasnAlexandr/movies-explorer-api#readme",
+  "devDependencies": {
+    "eslint": "^8.31.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.8.4"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "celebrate": "^15.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.7.0",
+    "express-winston": "^4.2.0",
+    "helmet": "^6.0.1",
+    "jsonwebtoken": "^9.0.0",
+    "mongoose": "^6.8.1",
+    "validator": "^13.7.0",
+    "winston": "^3.8.2"
+  }
+}
